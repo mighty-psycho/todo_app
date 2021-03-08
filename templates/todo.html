@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Todo
+{% endblock %}
+
+{% block content %}
+	<div class="templatemo-logo visible-xs-block">
+		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 black-bg logo-left-container">
+			<h1 class="logo-left">To</h1>
+		</div>
+		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 white-bg logo-right-container">
+			<h1 class="logo-right">Do</h1>
+		</div>			
+	</div>
+	<div class="templatemo-container">
+		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 black-bg left-container">
+			<h1 class="logo-left hidden-xs margin-bottom-60">To</h1>
+			<div class="tm-left-inner-container">
+				<ul class="nav nav-stacked templatemo-nav">
+				  <li><a href="{{ url_for('index') }}"><i class="fa fa-home fa-medium"></i>Homepage</a></li>
+                    {% if current_user.is_authenticated %}
+				  <li><a href="{{ url_for('todo') }}" class="active"><i class="fa fa-list fa-medium"></i>ToDo</a></li>
+                        <li><a href="{{ url_for('logout') }}"><i class="fa fa-sign-out fa-medium"></i>Logout</a></li>
+                    {% endif %}
+                {% if not current_user.is_authenticated %}
+				  <li><a href="{{ url_for('login') }}"><i class="fa fa-sign-in fa-medium"></i>Login</a></li>
+				  <li><a href="{{ url_for('register') }}"><i class="fa fa-user"></i>Sign Up</a></li>
+                {% endif %}
+				  <li><a href="{{  url_for('contact')  }}"><i class="fa fa-pencil-square-o"></i>Contact Me</a></li>
+				</ul>
+			</div>
+		</div> <!-- left section -->
+		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 white-bg right-container">
+			<h1 class="logo-right hidden-xs margin-bottom-60">Do</h1>
+			<div class="tm-right-inner-container">
+				<h1 class="templatemo-header"></h1>
+
+                      <nav>
+                        <div class="nav-wrapper black">
+                          <header class="brand-logo center">{{ current_user.name }}'s Tasks</header>
+                        </div>
+                      </nav>
+            {% with messages = get_flashed_messages() %}
+              {% if messages %}
+                {% for message in messages %}
+                    <div class="ui small message black text-center">
+                  <p>{{ message }}</p>
+                    </div>
+                {% endfor %}
+              {% endif %}
+            {% endwith %}
+
+              <div class="row">
+                <form method="POST" action="{{ url_for('todo') }}" class="col s12">
+                  <div class="row">
+                    <div class="input-field col s12">
+                      <input name="todo" type="text" class="validate" required>
+                      <label for="email">ToDo</label>
+                    </div>
+                     <button class="ui button black">Add
+                    </button>
+                  </div>
+                </form>
+              </div>
+                {% for todo in current_user.todos %}
+                    <div class="ui segment">
+                        <form method="POST" action="/update/{{ todo.id }}">
+                            <input required name="update_todo" class="ui big header" data-delay="50" data-toggle="tooltip" title="Update" value="{{ todo.name }}">
+                        </form>
+                            <form method="POST" action="/delete/{{ todo.id }}">
+                                <button class= "mini ui black button" >Delete</button>
+                            </form>
+                            </div>
+
+                {% endfor %}
+            </div>
+         </div>
+    </div>
+
+        <!-- right section -->
+
+{% endblock %}

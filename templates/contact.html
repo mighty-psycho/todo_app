@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Contact
+{% endblock %}
+
+{% block content %}
+	<div class="templatemo-logo visible-xs-block">
+		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 black-bg logo-left-container">
+			<h1 class="logo-left">To</h1>
+		</div>
+		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 white-bg logo-right-container">
+			<h1 class="logo-right">Do</h1>
+		</div>			
+	</div>
+	<div class="templatemo-container">
+		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 black-bg left-container">
+			<h1 class="logo-left hidden-xs margin-bottom-60">To</h1>
+			<div class="tm-left-inner-container">
+				<ul class="nav nav-stacked templatemo-nav">
+				  <li><a href="{{ url_for('index') }}"><i class="fa fa-home fa-medium"></i>Homepage</a></li>
+                    {% if current_user.is_authenticated %}
+				  <li><a href="{{ url_for('todo') }}"><i class="fa fa-list fa-medium"></i>ToDo</a></li>
+                        <li><a href="{{ url_for('logout') }}"><i class="fa fa-sign-out fa-medium"></i>Logout</a></li>
+                    {% endif %}
+                {% if not current_user.is_authenticated %}
+				  <li><a href="{{ url_for('login') }}"><i class="fa fa-sign-in fa-medium"></i>Login</a></li>
+				  <li><a href="{{ url_for('register') }}"><i class="fa fa-user"></i>Sign Up</a></li>
+                {% endif %}
+				  <li><a href="{{  url_for('contact')  }}" class="active"><i class="fa fa-pencil-square-o"></i>Contact Me</a></li>
+				</ul>
+			</div>
+		</div> <!-- left section -->
+		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 white-bg right-container">
+			<h1 class="logo-right hidden-xs margin-bottom-60">Do</h1>
+			<div class="tm-right-inner-container">
+				<h1 class="templatemo-header">Contact Me
+
+                         {% with messages = get_flashed_messages() %}
+                              {% if messages %}
+                                {% for message in messages %}
+                                    <div class="ui small message black text-center">
+                                  <p>{{ message }}</p>
+                                    </div>
+                                {% endfor %}
+                              {% endif %}
+                            {% endwith %}
+
+                    <div class="col-sm-12 col-md-12">
+                        <form action="#" method="POST">
+                                 <div class="row">
+                                        <div class="row">
+                                        <div class="input-field col s12">
+                                          <input name="name" type="text" class="validate" required>
+                                          <label for="email">Name</label>
+                                        </div>
+                                      </div>
+                                      <div class="row">
+                                        <div class="input-field col s12">
+                                          <input name="email" id="email" type="email" class="validate" required>
+                                          <label for="email">Email</label>
+                                        </div>
+                                      </div>
+                                        <div class="row">
+                                        <div class="input-field col s12">
+                                          <input name="subject" type="text" class="validate" required>
+                                          <label for="email">Subject</label>
+                                        </div>
+                                      </div>
+                                  </div>
+                             <div class="row">
+                                  <div class="input-field col s12">
+                                    <textarea name="text" id="textarea2" class="materialize-textarea" data-length="120" required></textarea>
+                                    <label for="textarea2">Textarea</label>
+                                  </div>
+                                </div>
+                            <div class="ui small buttons">
+                            <button type="submit" class="ui black button">Send</button>
+                                </form>
+                                <div class="or"></div>
+<<<<<<< HEAD
+                                  <a href="https://github.com/mighty-psycho/todo_app/blob/master/app.py"  class="ui black button"><i class="github icon"></i></a>
+                                <a href="https://www.linkedin.com/in/radomir-mijovic-401a98114/"  class="ui black button"><i class="linkedin icon"></i></a>
+=======
+                                  <a href="https://github.com/mighty-psycho/todo_app/blob/master/app.py" class="ui black button"><i class="github icon"></i></a>
+                                <a href="https://www.linkedin.com/in/radomir-mijovic-401a98114/" class="ui black button"><i class="linkedin icon"></i></a>
+>>>>>>> 738bd3ee9894919f8606e5a42baef7112d201531
+                                </div>
+                    </div>
+
+
+		</div> <!-- right section -->
+	</div>
+{% endblock %}

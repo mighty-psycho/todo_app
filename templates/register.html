@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Sign Up
+{% endblock %}
+
+{% block content %}
+
+
+	<div class="templatemo-logo visible-xs-block">
+		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 black-bg logo-left-container">
+			<h1 class="logo-left">To</h1>
+		</div>
+		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 white-bg logo-right-container">
+			<h1 class="logo-right">Do</h1>
+		</div>			
+	</div>
+	<div class="templatemo-container">
+		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 black-bg left-container">
+			<h1 class="logo-left hidden-xs margin-bottom-60">To</h1>
+			<div class="tm-left-inner-container">
+				<ul class="nav nav-stacked templatemo-nav">
+				  <li><a href="{{ url_for('index') }}"><i class="fa fa-home fa-medium"></i>Homepage</a></li>
+                    {% if current_user.is_authenticated %}
+				  <li><a href="{{ url_for('todo') }}"><i class="fa fa-list fa-medium"></i>ToDo</a></li>
+                        <li><a href="{{ url_for('logout') }}"><i class="fa fa-sign-out fa-medium"></i>Logout</a></li>
+                    {% endif %}
+                {% if not current_user.is_authenticated %}
+				  <li><a href="{{ url_for('login') }}"><i class="fa fa-sign-in fa-medium"></i>Login</a></li>
+				  <li><a href="{{ url_for('register') }}" class="active"><i class="fa fa-user"></i>Sign Up</a></li>
+                {% endif %}
+				  <li><a href="{{  url_for('contact')  }}"><i class="fa fa-pencil-square-o"></i>Contact Me</a></li>
+				</ul>
+			</div>
+		</div> <!-- left section -->
+		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 white-bg right-container">
+			<h1 class="logo-right hidden-xs margin-bottom-60">Do</h1>
+            <div class="tm-right-inner-container">
+                <h1 class="templatemo-header">Sign Up</h1>
+
+                     {% for error in reg_form.email.errors %}
+                         <div class="ui small message black text-center">{{ error }}</div>
+                     {% endfor %}
+                     {% for error in reg_form.password.errors %}
+                         <div class="ui small message black text-center">{{ error }}</div>
+                     {% endfor %}
+
+                  <div class="row">
+                    <form class="col s12" method="POST" action="{{ url_for('register') }}">
+                        <div class="row">
+                        <div class="input-field col s6" >
+                            {{ reg_form.hidden_tag() }}
+                            {{ reg_form.name() }}
+                            <label for="first_name">First Name</label>
+                        </div>
+                         <div class="input-field col s6">
+                     {{ reg_form.last_name() }}
+                        <label for="last_name">Last Name</label>
+                            </div>
+                          </div>
+                          </div>
+                          <div class="row">
+
+                            <div class="input-field col s12">
+                              {{ reg_form.email() }}
+                              <label for="email">Email</label>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="input-field col s12">
+                              {{ reg_form.password(placeholder="Password must be at least 8 character long") }}
+                              <label for="password">Password</label>
+                            </div>
+                          </div>
+                                <div class="text-right">
+                                <button class="btn waves-effect black">{{ reg_form.submit(value="Create account") }}
+                                </button>
+                                </div>
+                            </form>
+                <article class="templatemo-item">
+					<img src="/static/images/mini-profile-bg-01.jpg" alt="Japan" class="img-thumbnail">
+				</article><hr>
+                </div>
+            </div>
+    </div>
+
+{% endblock %}

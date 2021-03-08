@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Home Page
+{% endblock %}
+
+
+{% block content %}
+
+	<div class="templatemo-logo visible-xs-block">
+		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 black-bg logo-left-container">
+			<h1 class="logo-left">To</h1>
+		</div>
+		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 white-bg logo-right-container">
+			<h1 class="logo-right">Do</h1>
+		</div>			
+	</div>
+	<div class="templatemo-container">
+		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 black-bg left-container">
+			<h1 class="logo-left hidden-xs margin-bottom-60">To</h1>
+			<div class="tm-left-inner-container">
+				<ul class="nav nav-stacked templatemo-nav">
+				  <li><a href="{{ url_for('index') }}" class="active"><i class="fa fa-home fa-medium"></i>Homepage</a></li>
+                    {% if current_user.is_authenticated %}
+				  <li><a href="{{ url_for('todo') }}"><i class="fa fa-list fa-medium"></i>ToDo</a></li>
+                        <li><a href="{{ url_for('logout') }}"><i class="fa fa-sign-out fa-medium"></i>Logout</a></li>
+                    {% endif %}
+                {% if not current_user.is_authenticated %}
+				  <li><a href="{{ url_for('login') }}"><i class="fa fa-sign-in fa-medium"></i>Login</a></li>
+				  <li><a href="{{ url_for('register') }}"><i class="fa fa-user"></i>Sign Up</a></li>
+                {% endif %}
+				  <li><a href="{{  url_for('contact')  }}"><i class="fa fa-pencil-square-o"></i>Contact Me</a></li>
+				</ul>
+			</div>
+		</div> <!-- left section -->
+		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 white-bg right-container">
+			<h1 class="logo-right hidden-xs margin-bottom-60">Do</h1>
+			<div class="tm-right-inner-container">
+				<h2 class="templatemo-header">Sometimes our stop-doing list needs to be bigger than our to-do list</h2>
+                  {% with messages = get_flashed_messages() %}
+                              {% if messages %}
+                                {% for message in messages %}
+                                    <div class="ui small message black text-center">
+                                  <p>{{ message }}</p>
+                                    </div>
+                                {% endfor %}
+                              {% endif %}
+                            {% endwith %}
+				<img src="/static/images/mini-profile-bg-02.jpg" alt="Wooden Desk" class="img-thumbnail"><br><br>
+				<div class="text-center">
+<h4>“Focus on being productive instead of busy.”
+
+Tim Ferriss, American podcaster, author and entrepreneur<br><br>
+
+“Do the hard jobs first. The easy jobs will take care of themselves.”
+
+Dale Carnegie, American writer<br><br>
+
+“Productivity is being able to do things that you were never able to do before.”
+
+Franz Kafka, writer<br><br>
+
+“It’s not always that we need to do more but rather that we need to focus on less.”
+
+Nathan W. Morris, author and finance expert<br><br>
+
+“My goal is no longer to get more done, but rather to have less to do.”
+
+Francine Jay, author<br><br>
+
+“You can fool everyone else, but you can’t fool your own mind.”
+
+David Allen, author and productivity consultant<br><br>
+
+“You miss 100% of the shots you don’t take.”
+
+Wayne Gretzky, Canadian former professional ice hockey player<br><br>
+
+“Simplicity boils down to two steps: Identify the essential. Eliminate the rest.”
+
+Leo Babauta, blogger<br><br>
+
+“Strive not to be a success, but rather to be of value.”
+
+Albert Einstein, German theoretical physicist<br><br>
+
+“Sometimes, things may not go your way, but the effort should be there every single night.”
+
+    Michael Jordan, American basketball player</h4>
+				</div>
+			</div>
+		</div> <!-- right section -->
+	</div>
+{% endblock %}
